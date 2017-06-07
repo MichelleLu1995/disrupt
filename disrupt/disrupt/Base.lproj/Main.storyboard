@@ -122,17 +122,9 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="u61-y8-QrL">
-                                <rect key="frame" x="0.0" y="82" width="375" height="585"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <connections>
-                        <outlet property="mapView" destination="u61-y8-QrL" id="ZT8-L8-pe5"/>
-                        <outlet property="view" destination="u61-y8-QrL" id="VZs-YL-hgV"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hGz-rl-NhG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
