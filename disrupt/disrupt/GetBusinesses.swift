@@ -12,12 +12,15 @@ import SwiftyJSON
 
 class GetBusinesses {
     
-    
-    var term = "delis" //String()
-    var latitude = 37.786882 //Int()
-    var longitude = -122.399972//Int()
+    var term = "" //String()
+    var latitude = Int()
+    var longitude = Int()
     
     func getInfoFromAPI(completion: @escaping (() -> Void)){
+        var location = Location()
+        location.getCurrentLocation()
+        latitude = location.latitude
+        longitude = location.longitude
         print("inside function")
         let headers: HTTPHeaders = [
             "Authorization": "Bearer ArO4UNaUSgWgGhEcGycrp8csx77-t5IMl44vPf8woziVa2izC54kVPDtKKnQBwYevSOblu1B0lIk37a8cLqA6kPsi7Rb__ocKbXiAOSiQGk3Bs6dSGebso048304WXYx"
