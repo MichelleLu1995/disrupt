@@ -4,11 +4,19 @@
 target 'disrupt' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
+  
+  source 'https://github.com/CocoaPods/Specs.git'
+  platform :ios, '10.0'
 
   # Pods for disrupt
   pod 'GooglePlaces'
   pod 'GooglePlacePicker'
   pod 'GoogleMaps'
+  pod 'YelpAPI', '~> 2.0'
+  pod 'BrightFutures', '~> 5.1'
+  pod 'Alamofire', '~> 4.4'
+  pod 'SwiftyJSON'
+  
 
   target 'disruptTests' do
     inherit! :search_paths

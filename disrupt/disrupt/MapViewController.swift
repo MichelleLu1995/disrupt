@@ -10,11 +10,14 @@
 import UIKit
 import MapKit
 import GoogleMaps
+import GooglePlaces
+import GooglePlacePicker
 
 class MapViewController: UIViewController {
     
     
     var location = Location()
+    
     
     override func loadView() {
         // Create a GMSCameraPosition that tells the map to display the current location
@@ -38,6 +41,7 @@ class MapViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+   
     
     
     
