@@ -9,43 +9,37 @@
 
 import UIKit
 import MapKit
-
+import GoogleMaps
 
 class MapViewController: UIViewController {
     
-    @IBOutlet weak var mapView: MKMapView!
     
     var location = Location()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        // Create a GMSCameraPosition that tells the map to display the current location
         
         location.getCurrentLocation()
-        let userLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
-        centerMapOnLocation(location: userLocation)
         
-        // place a pin
-        dropPin()
+        let camera = GMSCameraPosition.camera(withLatitude: location.latitude, longitude: location.longitude, zoom: 6.0)
+        
+        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        view = mapView
+        
+        // Creates a marker in the center of the map.
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+        marker.title = "Sydney"
+        marker.snippet = "Australia"
+        marker.map = mapView
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    let regionRadius: CLLocationDistance = 4000
     
-    func centerMapOnLocation(location: CLLocation) {
-        print(location.coordinate);
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.0, regionRadius * 2.0)
-        mapView.setRegion(coordinateRegion, animated: true)
-    }
     
-    func dropPin() {
-        let droppedPin = MKPointAnnotation()
-        droppedPin.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-        droppedPin.title = "You are here"
-        mapView.addAnnotation(droppedPin)
-        print("dropped pin")
-    }
+    
     
 }

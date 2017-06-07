@@ -36,6 +36,11 @@
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Show your location on the map </string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>googlechromes</string>
+		<string>comgooglemaps</string>
+	</array>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Show your location on the map </string>
 </dict>
