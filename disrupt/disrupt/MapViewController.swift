@@ -20,6 +20,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        location.getCurrentLocation()
         let userLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
         centerMapOnLocation(location: userLocation)
         
@@ -31,9 +32,10 @@ class MapViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    let regionRadius: CLLocationDistance = 400
+    let regionRadius: CLLocationDistance = 4000
     
     func centerMapOnLocation(location: CLLocation) {
+        print(location.coordinate);
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.0, regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
     }
