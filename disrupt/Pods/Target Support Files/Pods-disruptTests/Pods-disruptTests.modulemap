@@ -1,0 +1,6 @@
+framework module Pods_disruptTests {
+  umbrella header "Pods-disruptTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
