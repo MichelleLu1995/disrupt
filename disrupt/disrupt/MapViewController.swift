@@ -26,7 +26,7 @@ class MapViewController: UIViewController {
         
         let camera = GMSCameraPosition.camera(withLatitude: location.latitude, longitude: location.longitude, zoom: 6.0)
         
-        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera);
         view = mapView
         
         // Creates a marker in the center of the map.
@@ -40,7 +40,7 @@ class MapViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
+
    
     
 }
