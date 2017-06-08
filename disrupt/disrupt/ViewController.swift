@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var api = GetBusinesses()
+//    var api = GetBusinesses()
 //    var location = Location()
 //    location.getCurrentLocation()
 //    api.latitude = location.latitude
@@ -20,12 +20,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var userTextField:UITextField!
     @IBOutlet weak var passwordTextField:UITextField!
     
-    @IBAction func callAPI(_ sender: Any) {
-        api.getInfoFromAPI { [unowned self] data in
-            print("here is the data >>>>>>>>>>>>>>>>>")
-            print(data["businesses"].count)
-        }
-    }
+//    @IBAction func callAPI(_ sender: Any) {
+//        api.getInfoFromAPI { [unowned self] data in
+//            print("here is the data >>>>>>>>>>>>>>>>>")
+//            print(data["businesses"].count)
+//        }
+//    }
     
     @IBAction func loginWasTapped(_ sender: Any) {
         if let username = userTextField.text{
@@ -34,12 +34,7 @@ class ViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        print("app is loaded")
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        // 
         // Dispose of any resources that can be recreated.
     }
 
