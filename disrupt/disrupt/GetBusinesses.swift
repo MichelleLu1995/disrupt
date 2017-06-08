@@ -13,10 +13,11 @@ import SwiftyJSON
 class GetBusinesses {
     
     var term = "" //String()
-    var latitude = Int()
-    var longitude = Int()
+    var latitude = Double()
+    var longitude = Double()
+    var radius = Int()
     
-    func getInfoFromAPI(completion: @escaping (() -> Void)){
+    func getInfoFromAPI(completion: @escaping ((_ json: JSON) -> Void)){
         var location = Location()
         location.getCurrentLocation()
         latitude = location.latitude
@@ -27,8 +28,8 @@ class GetBusinesses {
         ]
         
         var jsonResult:JSON = ""
-        let search = term + "&latitude=\(latitude)&longitude=\(longitude)"
-        let url = "https://api.yelp.com/v3/businesses/search?" + search
+        let search = term + "&latitude=\(latitude)&longitude=\(longitude)"//&radius=\(radius)"
+        let url = "https://api.yelp.com/v3/businesses/search?" + search + "&sort_by=distance&limit=10&open_now=true"
         print(url)
         Alamofire.request(url, headers: headers).responseJSON {response in
             print("in alamo")
@@ -41,9 +42,34 @@ class GetBusinesses {
                 jsonResult = JSON(json)
                 
                 print(jsonResult)
+                self.createStoreList(json: jsonResult)
             }
-            completion()
+            completion(jsonResult)
         }
+        
+    }
+    
+    func createStoreList(json: JSON) -> [Store]{
+        var storeList = [Store]()
+        for index in (0...json["businesses"].count) {
+            let data = json["businesses"][index]
+            let location = Location()
+            location.longitude = data["coordinates"]["longitude"].double == nil ? 0.00 : data["coordinates"]["longitude"].double!
+            location.latitude = data["coordinates"]["latitude"].double == nil ? 0.00 : data["coordinates"]["longitude"].double!
+            let store = Store()
+            store.name = data["name"].string == nil ? "" : data["name"].string!
+            store.distance = data["distance"].double == nil ? 0.00 : data["distance"].double!
+            store.location = location
+            store.street = data["address1"].string == nil ? "" : data["address1"].string!
+            store.city = data["city"].string == nil ? "" : data["city"].string!
+            store.state = data["state"].string == nil ? "" : data["state"].string!
+            store.zipcode = data["zip_code"].string == nil ? "" : data["zip_code"].string!
+            
+            storeList.append(store)
+        }
+        return storeList
+        
     }
     
 }
+
