@@ -17,6 +17,7 @@ class ViewController: UIViewController {
 //    api.latitude = location.latitude
 //    api.longitude = location.longitude
 //    
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var userTextField:UITextField!
     @IBOutlet weak var passwordTextField:UITextField!
     

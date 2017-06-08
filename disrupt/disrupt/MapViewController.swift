@@ -26,7 +26,7 @@ class MapViewController: UIViewController {
         
         let camera = GMSCameraPosition.camera(withLatitude: location.latitude, longitude: location.longitude, zoom: 6.0)
         
-        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera);
         view = mapView
         
         // Creates a marker in the center of the map.
@@ -40,24 +40,6 @@ class MapViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    
-//    @IBOutlet weak var segmentedControl: UISegmentedControl!
-//    
-//    @IBOutlet weak var mapView: UIView!
-//    @IBOutlet weak var listView: UIView!
-//    
-//    @IBAction func indexChanged(sender: UISegmentedControl) {
-//        switch segmentedControl.selectedSegmentIndex {
-//        case 0:
-//            mapView.isHidden = true
-//            listView.isHidden = false
-//        case 1:
-//            mapView.isHidden = false
-//            listView.isHidden = true
-//        default:
-//            break;
-//        }
-//    }
+  
     
 }
