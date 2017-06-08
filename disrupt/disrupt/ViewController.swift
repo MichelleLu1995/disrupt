@@ -10,8 +10,21 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var api = GetBusinesses()
+//    var location = Location()
+//    location.getCurrentLocation()
+//    api.latitude = location.latitude
+//    api.longitude = location.longitude
+//    
     @IBOutlet weak var userTextField:UITextField!
     @IBOutlet weak var passwordTextField:UITextField!
+    
+    @IBAction func callAPI(_ sender: Any) {
+        api.getInfoFromAPI { [unowned self] data in
+            print("here is the data >>>>>>>>>>>>>>>>>")
+            print(data["businesses"].count)
+        }
+    }
     
     @IBAction func loginWasTapped(_ sender: Any) {
         if let username = userTextField.text{
