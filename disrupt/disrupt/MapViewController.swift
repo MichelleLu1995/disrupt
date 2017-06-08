@@ -20,6 +20,7 @@ class MapViewController: UIViewController {
     
     
     override func loadView() {
+        self.title = "Map View"
         // Create a GMSCameraPosition that tells the map to display the current location
         
         location.getCurrentLocation()
