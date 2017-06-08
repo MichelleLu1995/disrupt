@@ -24,21 +24,40 @@ class MapViewController: UIViewController {
         
         location.getCurrentLocation()
         
-        let camera = GMSCameraPosition.camera(withLatitude: location.latitude, longitude: location.longitude, zoom: 6.0)
+        let camera = GMSCameraPosition.camera(withLatitude: location.latitude, longitude: location.longitude, zoom: 3.0)
         
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
         
         // Creates a marker in the center of the map.
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
-        marker.map = mapView
+        
+        let currMarker = GMSMarker()
+        createMarker(marker: currMarker, mapView: mapView, lat: location.latitude, lon: location.longitude)
+        
+        var nearbyMarkers = [GMSMarker]()
+        
+        //temp
+        for index in 1...10 {
+            let marker = GMSMarker()
+            nearbyMarkers.append(marker)
+            createMarker(marker: marker, mapView: mapView, lat: (location.latitude + Double(index)), lon: (location.longitude + Double(index)))
+        }
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func createMarker( marker : GMSMarker, mapView : GMSMapView, lat : Double, lon: Double ) {
+        marker.position = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+        marker.title = "Name"
+        marker.snippet =
+            "Cashback: " + String(lat) + "\n" +
+            "Rewards" + String(lon)
+        
+        marker.map = mapView
     }
     
    
