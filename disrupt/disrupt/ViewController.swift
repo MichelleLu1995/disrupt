@@ -21,10 +21,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var passwordTextField:UITextField!
     @IBOutlet var callGetBusinesses: UIButton!
     
-    @IBAction func callGetBusinesses(_ sender: Any) {
+    @IBAction func callAPI(_ sender: Any) {
         api.getInfoFromAPI { [unowned self] data in
-            print("here is the data >>>>>>>>>>>>>>>>>")
-            print(data["businesses"].count)
+            print("GetBusinesses test call:")
         }
     }
     

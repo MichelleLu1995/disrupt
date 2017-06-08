@@ -41,7 +41,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="k74-NU-AUY">
-                                <rect key="frame" x="97" y="87" width="180" height="50"/>
+                                <rect key="frame" x="82" y="87" width="211" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fmW-QW-neg">
                                         <rect key="frame" x="0.0" y="0.0" width="211" height="50"/>
@@ -68,18 +68,38 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CapRewards" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okU-ea-Lbe">
-                                <rect key="frame" x="98" y="134.5" width="180" height="38.5"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="cXr-KC-a74">
+                                <rect key="frame" x="97" y="41" width="180" height="76"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="76" id="QA4-F2-FbF"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RewardsFinder" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okU-ea-Lbe">
+                                <rect key="frame" x="82" y="163" width="211" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <color key="textColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ha-86-DsQ">
-                                <rect key="frame" x="16" y="513" width="46" height="8"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aaI-du-vxf">
+                                <rect key="frame" x="129" y="437" width="116" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="116" id="7ZW-Ap-ptG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
-                                    <action selector="callGetBusinesses:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3sv-zU-PgT"/>
+                                    <action selector="loginWasTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pGZ-uY-ZmD"/>
+                                    <segue destination="KJ1-lC-TRb" kind="show" id="baT-LO-P7j"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u78-Ih-JMF">
+                                <rect key="frame" x="172" y="522" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Test"/>
+                                <connections>
+                                    <action selector="callAPI:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qkx-2D-ote"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -104,7 +124,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="callGetBusinesses" destination="4Ha-86-DsQ" id="P8k-jy-s0s"/>
+                        <outlet property="imageView" destination="cXr-KC-a74" id="IEy-yB-60O"/>
                         <outlet property="passwordTextField" destination="ldH-3f-WoQ" id="r3d-1H-eWJ"/>
                         <outlet property="userTextField" destination="6Z4-3n-amz" id="BA1-FA-iBV"/>
                     </connections>
