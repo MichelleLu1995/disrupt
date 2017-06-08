@@ -70,6 +70,15 @@ class GetBusinesses {
         return storeList
         
     }
-    
+   
+    func createJSONforServer(storeList: [Store]) -> JSON {
+        var names = [String]()
+        for store in storeList {
+            names.append(store.name)
+        }
+        var json: JSON = ["userid": 4, "places": names]
+    	print(json)
+    	return json
+    } 
 }
 
