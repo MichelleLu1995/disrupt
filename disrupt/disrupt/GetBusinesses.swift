@@ -17,6 +17,7 @@ class GetBusinesses {
     var longitude = Double()
     var radius = Int()
     var storeDeals: JSON = ""
+    var jsonResult2: JSON = ""
     
     func getInfoFromAPI(completion: @escaping ((_ json: JSON) -> Void)){
         var location = Location()
@@ -64,8 +65,8 @@ class GetBusinesses {
                 print(response2.result.value)
                 
                 let json2 = response.result.value
-                let jsonResult2 = JSON(json2)
-                completion(jsonResult2)
+                self.jsonResult2 = JSON(json2)
+                completion(self.jsonResult2)
             }
         }
         
