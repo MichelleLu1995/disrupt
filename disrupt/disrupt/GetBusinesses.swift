@@ -12,12 +12,13 @@ import SwiftyJSON
 
 class GetBusinesses {
     
-    var term = "" //String()
+    var term = "food" //String()
     var latitude = Double()
     var longitude = Double()
     var radius = Int()
+    var storeDeals: JSON = ""
     
-    func getInfoFromAPI(completion: @escaping ((_ json: JSON) -> Void)){
+    func getInfoFromAPI(completion: @escaping ((_ storeList: [Store]) -> Void)){
         var location = Location()
         location.getCurrentLocation()
         latitude = location.latitude
@@ -29,7 +30,7 @@ class GetBusinesses {
         
         var jsonResult:JSON = ""
         let search = term + "&latitude=\(latitude)&longitude=\(longitude)"//&radius=\(radius)"
-        let url = "https://api.yelp.com/v3/businesses/search?" + search + "&sort_by=distance&limit=10&open_now=true"
+        let url = "https://api.yelp.com/v3/businesses/search?term=" + search + "&sort_by=distance&limit=50&open_now=true"
         print(url)
         Alamofire.request(url, headers: headers).responseJSON {response in
             print("in alamo")
@@ -40,13 +41,53 @@ class GetBusinesses {
             if let json = response.result.value {
                 print("json response")
                 jsonResult = JSON(json)
-                
                 print(jsonResult)
-                self.createStoreList(json: jsonResult)
+            }
+            completion(self.createStoreList(json: jsonResult))
+            
+        }
+        
+        
+    }
+    
+    func createJSONforServer(storeList: [Store]) -> [String]{
+        var names = [String]()
+        for store in storeList {
+            names.append(store.name)
+        }
+//        var json:[String: Any] = ["userid": 4, "places": names]
+        //        print(json)
+    
+//        return json
+        return names
+    }
+    
+    func getStoreDeals(storeList: [Store], completion: @escaping ((_ json: JSON) -> Void)) -> JSON{
+        var jsonResult:JSON = ""
+        var jsonInput = createJSONforServer(storeList: storeList)
+        //        var url = "localhost:8080/getrewards"
+        
+        
+        var j = ["userid" : 4, "places" : jsonInput] as [String : Any];
+        
+        let headers: HTTPHeaders = ["Content-Type":"application/json"]
+//        let params: [String: Any] = jsonInput
+        let params = j
+        Alamofire.request("localhost:8080/getrewards", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            print("this is the request")
+
+            print(response.request!)  // original URL request
+            print(response.response) // HTTP URL response
+            //            print(response.data)     // server data
+            //            print(response.result)
+            if let json = response.result.value {
+                jsonResult = JSON(json)
+                //                print(jsonResult)
+                
             }
             completion(jsonResult)
         }
-        
+        return jsonResult
     }
     
     func createStoreList(json: JSON) -> [Store]{
@@ -66,10 +107,46 @@ class GetBusinesses {
             store.zipcode = data["zip_code"].string == nil ? "" : data["zip_code"].string!
             
             storeList.append(store)
+            getStoreDeals(storeList: storeList) { [unowned self] data in
+                print(data)
+    
+            }
+            
         }
         return storeList
         
     }
+    
+//    func createJSONforServer(storeList: [Store]) -> JSON{
+//        var names = [String]()
+//        for store in storeList {
+//            names.append(store.name)
+//        }
+//        var json:JSON = ["userid": 4, "places": names]
+////        print(json)
+//        return json
+//    }
+    
+//    func getStoreDeals(storeList: [Store], completion: @escaping ((_ json: JSON) -> Void)) -> JSON{
+//        var jsonResult:JSON = ""
+//        var jsonInput = createJSONforServer(storeList: storeList)
+////        var url = "localhost:8080/getrewards"
+//        let params: JSON = jsonInput
+//        Alamofire.request("localhost:8080/getrewards", method: .post, parameters: params, encoding: URLEncoding.default).responseJSON { response in
+//            print("this is the request")
+//            print(response.request)  // original URL request
+////            print(response.response) // HTTP URL response
+////            print(response.data)     // server data
+////            print(response.result)
+//            if let json = response.result.value {
+//                jsonResult = JSON(json)
+////                print(jsonResult)
+//                
+//            }
+//            completion(jsonResult)
+//        }
+//        return jsonResult
+//    }
     
 }
 

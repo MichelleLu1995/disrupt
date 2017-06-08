@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     var api = GetBusinesses()
+    var storeList = [Store]()
 //    var location = Location()
 //    location.getCurrentLocation()
 //    api.latitude = location.latitude
@@ -21,15 +22,20 @@ class ViewController: UIViewController {
     
     @IBAction func callAPI(_ sender: Any) {
         api.getInfoFromAPI { [unowned self] data in
-            print("here is the data >>>>>>>>>>>>>>>>>")
-            print(data["businesses"].count)
+            print(data)
+            self.storeList = data
+            
         }
+        print("awiejf;aowiejf;oaijwf;")
+        print(storeList)
     }
     
     @IBAction func loginWasTapped(_ sender: Any) {
         if let username = userTextField.text{
             print("user \(username) logged in")
         }
+        print("in login tapped")
+        print(storeList)
     }
     override func viewDidLoad() {
         super.viewDidLoad()

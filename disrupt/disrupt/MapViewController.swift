@@ -41,7 +41,6 @@ class MapViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-   
     
 //    @IBOutlet weak var segmentedControl: UISegmentedControl!
 //    
