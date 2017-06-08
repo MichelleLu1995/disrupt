@@ -20,8 +20,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var passwordTextField:UITextField!
     
     @IBAction func callAPI(_ sender: Any) {
-        api.getInfoFromAPI {
-            print("helloo")
+        api.getInfoFromAPI { [unowned self] data in
+            print("here is the data >>>>>>>>>>>>>>>>>")
+            print(data["businesses"].count)
         }
     }
     
