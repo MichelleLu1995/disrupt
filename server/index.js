@@ -1,7 +1,6 @@
 var express    = require('express');
 var app        = express();
 var http	     = require('http').createServer(app)
-//var routes     = require('./routes');
 var bodyParser = require('body-parser');
  
 // Set port
@@ -54,6 +53,22 @@ app.route('/adduser')
 
     });
 
+// add a favorite for the user
+app.route('/addfavorite')
+    .post(function(req, res) {
+
+        var userid = req.body.userid;
+        var storename = req.body.storename;
+
+        db.run("INSERT INTO Favorites (UserID, StoreID) VALUES (?, (SELECT StoreID FROM Stores WHERE StoreName = ?))",
+          userid, storename, function(err) {
+            if (err) {res.send(err);
+            } else {
+              res.json({ message: 'Favorite added successfully!' });
+            }
+        });
+
+    });
 
 app.route('/getrewards')
     .post(function(req, res) {
