@@ -62,22 +62,4 @@ class MapViewController: UIViewController {
     
    
     
-//    @IBOutlet weak var segmentedControl: UISegmentedControl!
-//    
-//    @IBOutlet weak var mapView: UIView!
-//    @IBOutlet weak var listView: UIView!
-//    
-//    @IBAction func indexChanged(sender: UISegmentedControl) {
-//        switch segmentedControl.selectedSegmentIndex {
-//        case 0:
-//            mapView.isHidden = true
-//            listView.isHidden = false
-//        case 1:
-//            mapView.isHidden = false
-//            listView.isHidden = true
-//        default:
-//            break;
-//        }
-//    }
-    
 }
