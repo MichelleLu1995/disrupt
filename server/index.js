@@ -41,10 +41,10 @@ app.get('/', function(req, res) {
 app.route('/adduser')
     .post(function(req, res) {
 
-        var name = req.body.name;
+        var username = req.body.username;
         var cardType = req.body.card_type;
 
-        db.run("INSERT INTO users (name, cardtype) VALUES (?, ?)", name, cardType, function(err) {
+        db.run("INSERT INTO users (Username, CardID) VALUES (?, (SELECT CardID FROM Cards WHERE CardType = ?))", username, cardType, function(err) {
           if (err) {res.send(err);
           } else {
             res.json({ message: 'User created successfully!' });
@@ -70,10 +70,11 @@ app.route('/addfavorite')
 
     });
 
+// given a user ID and list of stores, determine the rewards possible
 app.route('/getrewards')
     .post(function(req, res) {
 
-        //var username = req.body.username;
+        var userid = req.body.userid;
         var places = req.body.places;
         var deals = {items: []};
         var placesFormatted = "(";
@@ -87,8 +88,9 @@ app.route('/getrewards')
         placesFormatted = placesFormatted.concat(")");
 
         // for now, assume the credit card is Venture
-        var sql = "SELECT * FROM Venture WHERE StoreName IN ";
+        var sql = "SELECT * FROM Rewards WHERE StoreName IN ";
         sql = sql.concat(placesFormatted);
+        sql = sql.concat(" AND CardID = (SELECT CardID FROM Users WHERE UserID = " + userid + ")");
 
         db.all(sql, function(err, rows) {
           if (err) {
