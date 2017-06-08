@@ -79,13 +79,18 @@ app.route('/getrewards')
         var deals = {items: []};
         var placesFormatted = "(";
 
+        console.log(req.body);
+        console.log(places);
+
         for (var i = 0; i < places.length; i++) {
-          placesFormatted = placesFormatted.concat("\'" + places[i] + "\'");
+          str = places[i].replace(/'/g, '');
+          placesFormatted = placesFormatted.concat("\'" + str + "\'");
           if (i != places.length-1) {
             placesFormatted = placesFormatted.concat(",");
           }
         }
         placesFormatted = placesFormatted.concat(")");
+        console.log(placesFormatted);
 
         // for now, assume the credit card is Venture
         var sql = "SELECT * FROM Rewards WHERE StoreName IN ";
@@ -95,7 +100,10 @@ app.route('/getrewards')
         db.all(sql, function(err, rows) {
           if (err) {
             res.send(err);
+            console.log("FAILED");
           } else if (rows.length == 0) {
+            console.log("nothing");
+            res.json(deals);
           } else {
             for (var i = 0; i < rows.length; i++) {
               var row = rows[i];
@@ -103,6 +111,8 @@ app.route('/getrewards')
               deals.items.push(data);
             }
             res.json(deals);
+            console.log("SUCCESS");
+            console.log(deals);
           }
         });
 
