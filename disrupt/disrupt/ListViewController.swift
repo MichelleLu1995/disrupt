@@ -10,6 +10,7 @@ import UIKit
 
 class ListViewController: UIViewController{
     
+    
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
