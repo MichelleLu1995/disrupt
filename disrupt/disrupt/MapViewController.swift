@@ -15,12 +15,28 @@ import GooglePlacePicker
 
 class MapViewController: UIViewController {
     
+    var api = GetBusinesses()
     
     var location = Location()
+    
+//    func callAPI(_ sender: Any) {
+//        api.getInfoFromAPI { [unowned self] data in
+//            print("here is the data >>>>>>>>>>>>>>>>>")
+//            print(data["businesses"].count)
+//        }
+//    }
     
     
     override func loadView() {
         // Create a GMSCameraPosition that tells the map to display the current location
+        
+        api.getInfoFromAPI { [unowned self] data in
+            print("here is the data >>>>>>>>>>>>>>>>>")
+            print(data["businesses"].count)
+        }
+        
+        print(api.latitude)
+        
         
         location.getCurrentLocation()
         

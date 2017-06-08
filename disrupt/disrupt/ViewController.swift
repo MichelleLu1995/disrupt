@@ -19,11 +19,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var userTextField:UITextField!
     @IBOutlet weak var passwordTextField:UITextField!
+    @IBOutlet var callGetBusinesses: UIButton!
     
     @IBAction func callAPI(_ sender: Any) {
         api.getInfoFromAPI { [unowned self] data in
-            print("here is the data >>>>>>>>>>>>>>>>>")
-            print(data["businesses"].count)
+            print("GetBusinesses test call:")
         }
     }
     
@@ -34,12 +34,7 @@ class ViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        print("app is loaded")
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        // 
         // Dispose of any resources that can be recreated.
     }
 
