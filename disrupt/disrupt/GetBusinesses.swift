@@ -16,6 +16,8 @@ class GetBusinesses {
     var latitude = Double()
     var longitude = Double()
     var radius = Int()
+    var deals: JSON = ""
+    var dealList: [DealModel] = []
     
     func getInfoFromAPI(completion: @escaping ((_ json: JSON) -> Void)){
         var location = Location()
@@ -42,13 +44,12 @@ class GetBusinesses {
             if let json = response.result.value {
                 print("json response")
                 jsonResult = JSON(json)
-                
-                print(jsonResult)
             }
-            completion(jsonResult)
             
             let stores = self.createStoreList(json: jsonResult)
             let storesJSON = self.createJSONforServer(storeList: stores)
+            
+            var jsonResult2: JSON = ""
             
             let request2 = Alamofire.request("http://127.0.0.1:8080/getrewards", method: .post, parameters: storesJSON)
             request2.responseJSON { response2 in
@@ -63,8 +64,15 @@ class GetBusinesses {
                 print("result value")
                 print(response2.result.value)
                 
-                let json2 = response.result.value
-                let jsonResult2 = JSON(json2)
+                if let json2 = response2.result.value {
+                    print("json2 response")
+                    jsonResult2 = JSON(json2)
+                    print(jsonResult2)
+                }
+                
+                let dealList = self.createDealList(json: jsonResult2)
+                self.dealList = dealList
+                
                 completion(jsonResult2)
             }
         }
@@ -73,7 +81,7 @@ class GetBusinesses {
     
     func createStoreList(json: JSON) -> [Store]{
         var storeList = [Store]()
-        for index in (0...json["businesses"].count) {
+        for index in (0...json["businesses"].count-1) {
             let data = json["businesses"][index]
             let location = Location()
             location.longitude = data["coordinates"]["longitude"].double == nil ? 0.00 : data["coordinates"]["longitude"].double!
@@ -98,9 +106,23 @@ class GetBusinesses {
         for store in storeList {
             names.append(store.name)
         }
-        var json: Parameters = ["userid": 1, "places": names]
+        let json: Parameters = ["userid": 4, "places": names]
     	print(json)
     	return json
-    } 
+    }
+    
+    // give JSON response from server, create array of DealModel
+    func createDealList(json: JSON) -> [DealModel]{
+        var dealList = [DealModel]()
+        for index in (0...json["items"].count-1) {
+            let data = json["items"][index]
+            let storename = data["storename"].string == nil ? "" : data["storename"].string!
+            let deal = data["deal"].string == nil ? "" : data["deal"].string!
+            let dealModel = DealModel(storename: storename, deal: deal)
+            dealList.append(dealModel)
+        }
+        return dealList
+        
+    }
 }
 
